@@ -1,0 +1,68 @@
+<app-nav></app-nav>
+<br>
+<h3 style=" text-align: center;"> Usuarios existentes</h3>
+<div class="row">
+    <div class="col text-right">
+        <button routerLink="/registro/nuevo" class="btn btn-primary">
+            <i class="fa fa-plus"></i>
+            Crear
+        </button>
+    </div>
+</div>
+<br>
+<table *ngIf="!cargando && usuarios.length>0" class="table mt3 animated fadeIn faster">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellidos</th>
+            <th scope="col">Identificacion(CC)</th>
+            <th scope="col">RolAsociado</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Correo electronico</th>
+            <th scope="col">Id</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let usuario of usuarios; let i =index">
+            <th scope="row">{{i+1}}</th>
+            <td>{{usuario.nombre}}</td>
+            <td>{{usuario.apellidos}}</td>
+            <td>{{usuario.identificacion}}</td>
+            <td>{{usuario.rol}}</td>
+            <td>{{usuario.estado}}</td>
+            <td>{{usuario.telefono}}</td>
+            <td>{{usuario.email}}</td>
+            <td>{{usuario.id}}</td>
+
+
+            <td>
+                <button class="btn btn-info mr-1" [routerLink]="['/registro',usuario.id]">
+                    <i class="fa fa-pen"></i>
+                </button>
+                <button class="btn btn-danger" (click)="borrarusuario(usuario,i)">
+                    <i class="fa fa-trash"></i>
+                </button>
+            </td>
+        </tr>
+
+</table>
+<div *ngIf="!cargando && usuarios.length===0" class="alert alert-warning text-center mt3">
+    <h4 class="alert. heading">No hay registros</h4>
+    <p>
+        <i class="fa fa-exclamation fa-2x" aria-hidden="true"></i>
+    </p>
+
+</div>
+<div *ngIf="cargando">
+    <div class="alert alert-info text-center mt3">
+        <h4>Cargando</h4>
+        <p>
+            <i class="fa fas fa-spinner fa-pulse fa-2x"></i>
+        </p>
+        <p>
+            Espere por favor
+        </p>
+    </div>
+</div>
